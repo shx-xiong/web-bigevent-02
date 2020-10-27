@@ -28,7 +28,7 @@ $(function () {
         e.preventDefault()
         $.ajax({
             type: 'post',
-            url: 'http://ajax.frontend.itheima.net/api/reguser',
+            url: '/api/reguser',
             data: {
                 username: $('#form_reg input[name=username]').val(),
                 password: $('#form_reg input[name=password]').val()
@@ -38,6 +38,24 @@ $(function () {
                     return layer.msg(res.message)
                 }
                 layer.msg(res.message)
+            }
+        })
+    })
+
+    //登录功能
+    $('#form_login').on('submit', function (e) {
+        e.preventDefault()
+        $.ajax({
+            type: 'post',
+            url: '/api/login',
+            data: $(this).serialize(),
+            success: function (res) {
+                if (res.status !== 0) {
+                    return layer.msg(res.message)
+                }
+                layer.msg(res.message)
+                localStorage.setItem('token', res.token)
+                location.href = '/index.html'
             }
         })
     })
