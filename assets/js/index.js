@@ -1,5 +1,21 @@
 $(function () {
+    //获取用户信息
     getUserInfo()
+
+    //退出登录
+    var layer = layui.layer
+    $('#btnLogout').on('click', function () {
+        layer.confirm('确定退出登录?', {
+            icon: 3,
+            title: '提示'
+        }, function (index) {
+            localStorage.removeItem('token')
+            location.href = '/login.html'
+            layer.close(index);
+        })
+
+    })
+
 })
 
 //封装获取用户信息函数
